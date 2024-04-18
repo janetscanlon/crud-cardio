@@ -1,6 +1,6 @@
 const express = require('express');
 
-const thingsRouter = require('./routes/things.router.js');
+const thingsRouter = require('./routes/books.router.js');
 
 const PORT = 5001;
 

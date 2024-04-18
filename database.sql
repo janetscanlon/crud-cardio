@@ -1,25 +1,22 @@
 -- These two lines make it so that every single SQL query in
 -- this file can be ran all at once to "reset" the database:
 DROP TRIGGER IF EXISTS "on_things_update" ON "things";
-DROP TABLE IF EXISTS "things";
+DROP TABLE IF EXISTS "books";
 
 -- Table Schema Template:
-CREATE TABLE "things" (
+CREATE TABLE "books" (
   "id" SERIAL PRIMARY KEY,
-  "name" VARCHAR(500) NOT NULL,
-  "is_nifty" BOOLEAN,
-  "inserted_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
-  "updated_at" TIMESTAMPTZ NOT NULL DEFAULT now()
+  "title" VARCHAR(500) NOT NULL,
+  "pages" INTEGER,
+  "completed" BOOLEAN DEFAULT FALSE
 );
 
 -- Seed Data Template:
-INSERT INTO "things"
-  ("name", "is_nifty")
+INSERT INTO "books"
+  ("title","pages", "completed")
   VALUES
-  ('Gizmo', true),
-  ('Gadget', true),
-  ('Bits', true),
-  ('Bobs', false);
+  ('The Crimson Moth', 400, true),
+  ('What Is Dark Within Me', 300, false);
   
 -- Creates a trigger that handles the updated_at magic:
   -- https://x-team.com/blog/automatic-timestamps-with-postgresql/

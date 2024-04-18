@@ -4,7 +4,7 @@ const Pool = pg.Pool;
 
 
 const pool = new Pool({
-  database: 'things', // 👈 CHANGE THIS!
+  database: 'book-keeper-app', // 👈 CHANGE THIS!
   host: 'localhost',
   port: 5432,
 });
