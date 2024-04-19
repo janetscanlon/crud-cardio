@@ -4,15 +4,35 @@ const pool = require('../modules/pool.js');
 const router = express.Router();
 
 
-// GET /things - - - - - - - Respond with all the things.
+// GET /books - - - - - - - Respond with all the books.
+router.get('/', (req,res) => {
+    console.log('GET /books')
 
-// GET /things/:id - - - - - Respond with one thing.
+    //sql query to send to the db
+    const sqlText = `
+                    SELECT * FROM books
+                    ORDER BY id;`
+    
+    //use pool.query to send sql to the db
+    pool.query(sqlText)
+        .then((dbResult) => {
+            let booksRequested = dbResult.rows
+            res.send(booksRequested)
+        })
+        .catch((dbError) => {
+            console.log('DB query failed inside GET /books')
+            console.log('error is:', dbError)
+            res.sendStatus(500)
+    })
+})
+// GET /books/:id - - - - - Respond with one thing.
 
-// POST /things - - - - - -  Create one thing.
+// POST /books - - - - - -  Create one thing.
 
-// DELETE /things/:id - - -  Delete one thing.
+// DELETE /books/:id - - -  Delete one thing.
 
-// PUT /things/:id - - - - - Update one thing.
+// PUT /books/:id - - - - - Update one thing.
+
 
 
 module.exports = router;
